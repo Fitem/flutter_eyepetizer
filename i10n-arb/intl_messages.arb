@@ -1,0 +1,9 @@
+{
+  "@@last_modified": "2021-04-09T00:03:21.382678",
+  "title": "Flutter Eyepetizer",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
