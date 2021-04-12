@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/app_constants.dart';
+import 'package:flutter_eyepetizer/model/home_page_recommend.dart';
 
 class Git {
   // 在网络请求过程中可能会需要使用当前的context信息，比如在请求失败时
@@ -15,5 +16,14 @@ class Git {
 
   static void init() {
     // 添加缓存插件
+  }
+
+  //首页推荐
+  Future<HomePageRecommend> homePageRecommend() async {
+    var r = await dio.get(
+      Constants.HOMEPAGE_RECOMMEND_URL,
+      options: _options,
+    );
+    return HomePageRecommend.fromJson(r.data);
   }
 }
