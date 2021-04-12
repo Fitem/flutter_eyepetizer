@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "title" : MessageLookupByLibrary.simpleMessage("Flutter开眼"),
-    "home" : MessageLookupByLibrary.simpleMessage("主页")
+    "home" : MessageLookupByLibrary.simpleMessage("主页"),
+    "theme" : MessageLookupByLibrary.simpleMessage("换肤"),
+    "language" : MessageLookupByLibrary.simpleMessage("语言"),
+    "auto" : MessageLookupByLibrary.simpleMessage("跟随系统"),
+    "community" : MessageLookupByLibrary.simpleMessage("社区"),
   };
 }

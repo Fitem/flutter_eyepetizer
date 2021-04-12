@@ -14,13 +14,13 @@ class ProfileChangeNotifier extends ChangeNotifier {
 
 class ThemeModel extends ProfileChangeNotifier {
   // 获取当前主题，如果为设置主题，则默认使用蓝色
-  ColorSwatch get theme => Global.themes
+  MaterialColor get theme => Global.themes
       .firstWhere((e) => e.value == _profile.theme, orElse: () => Colors.blue);
 
   // 主题改变后，通知其依赖项，新主题会立即生效
   set theme(ColorSwatch color) {
     if (color != theme) {
-      _profile.theme = color[500].value;
+      _profile.theme = color[500]!.value;
       notifyListeners();
     }
   }
@@ -28,18 +28,18 @@ class ThemeModel extends ProfileChangeNotifier {
 
 class LocaleModel extends ProfileChangeNotifier {
   // 获取当前用户的App语言配置Locale类，如果为null，则语言跟随系统语言
-  Locale getLocale() {
+  Locale? getLocale() {
     if (_profile.locale == null) return null;
-    var t = _profile.locale.split("_");
+    var t = _profile.locale!.split("_");
     return Locale(t[0], t[1]);
   }
 
   // 获取当前Locale的字符串表示
-  String get locale => _profile.locale;
+  String? get locale => _profile.locale;
 
   //用户改变App语言后，通知依赖项更新，新语言会立即生效
-  set locale(String locale) {
-    if (locale != _profile.locale) {
+  set locale(String? locale) {
+    if (locale != null && locale != _profile.locale) {
       _profile.locale = locale;
       notifyListeners();
     }

@@ -5,7 +5,7 @@ import 'messages_all.dart'; //1
 class GmLocalizations {
   static Future<GmLocalizations> load(Locale locale) {
     final String name =
-        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+        locale.countryCode!.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     //2
     return initializeMessages(localeName).then((b) {
@@ -15,7 +15,7 @@ class GmLocalizations {
   }
 
   static GmLocalizations of(BuildContext context) {
-    return Localizations.of<GmLocalizations>(context, GmLocalizations);
+    return Localizations.of<GmLocalizations>(context, GmLocalizations)!;
   }
 
   String get title {
@@ -27,6 +27,20 @@ class GmLocalizations {
   }
 
   String get home => Intl.message("home", name: "home");
+
+  String get theme => Intl.message('Theme', name: 'theme');
+
+  String get language => Intl.message('Language', name: 'language');
+
+  String get auto => Intl.message('Auto', name: 'auto');
+
+  String get community => Intl.message('Community', name: 'community');
+
+  String get discovery => Intl.message('发现', name: 'discovery');
+
+  String get recommend => Intl.message('推荐', name: 'recommend');
+
+  String get daily => Intl.message('日报', name: 'daily');
 }
 
 //Locale代理类

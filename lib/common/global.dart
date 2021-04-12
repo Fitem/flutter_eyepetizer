@@ -16,7 +16,7 @@ const _themes = <MaterialColor>[
 ];
 
 class Global {
-  static SharedPreferences _prefs;
+  static late SharedPreferences _prefs;
   static Profile profile = Profile();
 
   // 可选的主题列表

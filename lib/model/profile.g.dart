@@ -8,11 +8,11 @@ part of 'profile.dart';
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) {
   return Profile()
-    ..theme = json['theme'] as int
-    ..locale = json['locale'] as String;
+    ..theme = json['theme'] as int?
+    ..locale = json['locale'] as String?;
 }
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'theme': instance.theme,
-      'locale': instance.locale
+      'locale': instance.locale,
     };

@@ -1,13 +1,16 @@
-import 'package:json_annotation/json_annotation.dart'; 
-  
+import 'package:json_annotation/json_annotation.dart';
+
 part 'profile.g.dart';
 
 
 @JsonSerializable()
-  class Profile extends Object {
+class Profile extends Object {
 
-  int theme;
-  String locale;
+  @JsonKey(name: 'theme')
+  int? theme;
+
+  @JsonKey(name: 'locale')
+  String? locale;
 
   Profile();
 
@@ -17,4 +20,4 @@ part 'profile.g.dart';
 
 }
 
-  
+

@@ -9,8 +9,8 @@ class Git {
     _options = Options(extra: {Constants.context: context});
   }
 
-  BuildContext context;
-  Options _options;
+  BuildContext? context;
+  Options? _options;
   static Dio dio = new Dio(BaseOptions(baseUrl: Constants.BASE_URL));
 
   static void init() {

@@ -1,72 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/l10n/localization_intl.dart';
 
-class HomeRoute extends StatefulWidget {
+import '../app_constants.dart';
+import 'daily_page.dart';
+import 'discovery_page.dart';
+import 'recommend_page.dart';
+
+class HomePage extends StatefulWidget {
   @override
-  _HomeRouteState createState() => _HomeRouteState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomeRouteState extends State<HomeRoute> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin, RestorationMixin {
+  late TabController _tabController;
+  final RestorableInt tabIndex = RestorableInt(1);
+
+  @override
+  String get restorationId => Constants.HOME_PAGE;
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(tabIndex, Constants.HOME_PAGE_TABLE_INDEX);
+    _tabController.index = tabIndex.value;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      initialIndex: 0,
+      length: 3,
+      vsync: this,
+    );
+    _tabController.addListener(() {
+      setState(() {
+        tabIndex.value = _tabController.index;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    tabIndex.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final tabs = [
+      GmLocalizations.of(context).discovery,
+      GmLocalizations.of(context).recommend,
+      GmLocalizations.of(context).daily,
+    ];
+    final tabChildrens = [
+      DiscoveryPage(),
+      RecommendPage(),
+      DailyPage(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(GmLocalizations.of(context).home),
-      ),
-      body: _buildBody(), // 构建主页面
-      drawer: MyDrawer(), //抽屉菜单
-    );
-  }
-
-  Widget _buildBody() {
-    //用户未登录，显示登录按钮
-    return Center(
-      child: RaisedButton(
-        child: Text(GmLocalizations.of(context).home),
-        onPressed: () => Navigator.of(context).pushNamed("login"),
-      ),
-    );
-  }
-}
-
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: MediaQuery.removePadding(
-        context: context,
-        // DrawerHeader consumes top MediaQuery padding.
-        removeTop: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildHeader(context), //构建抽屉菜单头部
-          ],
+        title: Container(
+          child: TabBar(
+            controller: _tabController,
+            isScrollable: true,
+            tabs: [
+              for (final tab in tabs) Tab(text: tab),
+            ],
+            labelStyle: TextStyle(fontSize: 16),
+          ),
+          alignment: Alignment.center,
+          // color: Colors.red,
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+            ),
+            onPressed: () {},
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        color: Theme.of(context).primaryColor,
-        padding: EdgeInsets.only(top: 40, bottom: 20),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ClipOval(
-                // 如果已登录，则显示用户头像；若未登录，则显示默认头像
-                child: Text("title"),
-              ),
-            )
-          ],
-        ),
+      body: TabBarView(
+        controller: _tabController,
+        children: tabChildrens,
       ),
     );
   }
