@@ -52,6 +52,14 @@ Data _$DataFromJson(Map<String, dynamic> json) {
     json['content'] == null
         ? null
         : Content.fromJson(json['content'] as Map<String, dynamic>),
+    json['text'] as String?,
+    json['type'] as String?,
+    json['cover'] == null
+        ? null
+        : Cover.fromJson(json['cover'] as Map<String, dynamic>),
+    json['library'] as String?,
+    json['category'] as String?,
+    json['title'] as String?,
   );
 }
 
@@ -59,6 +67,12 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'dataType': instance.dataType,
       'header': instance.header,
       'content': instance.content,
+      'text': instance.text,
+      'type': instance.type,
+      'cover': instance.cover,
+      'library': instance.library,
+      'category': instance.category,
+      'title': instance.title,
     };
 
 Header _$HeaderFromJson(Map<String, dynamic> json) {

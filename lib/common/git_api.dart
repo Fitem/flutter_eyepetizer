@@ -15,15 +15,28 @@ class Git {
   static Dio dio = new Dio(BaseOptions(baseUrl: Constants.BASE_URL));
 
   static void init() {
-    // 添加缓存插件
+    // 添加插件
+    dio.interceptors.add(LogInterceptor(responseBody: true)); //开启请求日志
   }
 
   //首页推荐
   Future<HomePageRecommend> homePageRecommend() async {
     var r = await dio.get(
-      Constants.HOMEPAGE_RECOMMEND_URL,
+      configCommonParForUrl(Constants.HOMEPAGE_RECOMMEND_URL),
       options: _options,
     );
     return HomePageRecommend.fromJson(r.data);
+  }
+
+  //配置通用参数
+  String configCommonParForUrl(String url) {
+    var par =
+        "udid=c73ca584c174edce&vc=6030012&vn=6.3.01&size=1080X2029&deviceModel=MI%208&first_channel=xiaomi&last_channel=xiaomi&system_version_code=29";
+    ///url中有可能拼接着其他参数
+    if (url.contains("?")) {
+      return url += "&$par";
+    } else {
+      return url += "?$par";
+    }
   }
 }

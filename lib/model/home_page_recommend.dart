@@ -44,7 +44,7 @@ class ItemList extends Object {
 
   @JsonKey(name: 'adIndex')
   int? adIndex;
-
+  
   ItemList(this.type,this.data,this.id,this.adIndex,);
 
   factory ItemList.fromJson(Map<String, dynamic> srcJson) => _$ItemListFromJson(srcJson);
@@ -66,7 +66,25 @@ class Data extends Object {
   @JsonKey(name: 'content')
   Content? content;
 
-  Data(this.dataType,this.header,this.content);
+  @JsonKey(name: 'text')
+  String? text;
+
+  @JsonKey(name: 'type')
+  String? type;
+
+  @JsonKey(name: 'cover')
+  Cover? cover;
+
+  @JsonKey(name: 'library')
+  String? library;
+
+  @JsonKey(name: 'category')
+  String? category;
+
+  @JsonKey(name: 'title')
+  String? title;
+
+  Data(this.dataType,this.header,this.content,this.text,this.type,this.cover,this.library,this.category,this.title);
 
   factory Data.fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 
