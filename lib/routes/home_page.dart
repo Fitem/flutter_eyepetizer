@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/l10n/localization_intl.dart';
+import 'package:flutter_gen/gen_l10n/eyepetizer_localizations.dart';
 
 import '../app_constants.dart';
 import 'daily_page.dart';
@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      GmLocalizations.of(context).discovery,
-      GmLocalizations.of(context).recommend,
-      GmLocalizations.of(context).daily,
+      EyepetizerLocalizations.of(context)!.discovery,
+      EyepetizerLocalizations.of(context)!.recommend,
+      EyepetizerLocalizations.of(context)!.daily,
     ];
     final tabChildrens = [
       DiscoveryPage(),

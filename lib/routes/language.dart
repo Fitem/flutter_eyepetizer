@@ -1,15 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_eyepetizer/l10n/localization_intl.dart';
 import 'package:flutter_eyepetizer/static/profile_change_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/eyepetizer_localizations.dart';
 
 class LanguageRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var color = Theme.of(context).primaryColor;
     var localeModel = Provider.of<LocaleModel>(context);
-    var gm = GmLocalizations.of(context);
+    var gm = EyepetizerLocalizations.of(context)!;
     Widget _buildLanguageItem(String lan, value) {
       return ListTile(
         title: Text(

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/common/global.dart';
-import 'package:flutter_eyepetizer/l10n/localization_intl.dart';
 import 'package:flutter_eyepetizer/static/profile_change_notifier.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'model/home_page_recommend.dart';
 import 'routes/home_route.dart';
 import 'routes/theme_change.dart';
 import 'routes/language.dart';
+import 'package:flutter_gen/gen_l10n/eyepetizer_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,25 +22,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: LocaleModel())
       ],
       child: Consumer2<ThemeModel, LocaleModel>(
-        builder: (BuildContext context, themeModel, localeModel, Widget? child) {
+        builder:
+            (BuildContext context, themeModel, localeModel, Widget? child) {
           return MaterialApp(
               theme: ThemeData(primarySwatch: themeModel.theme),
               onGenerateTitle: (context) {
-                return GmLocalizations.of(context).title;
+                return EyepetizerLocalizations.of(context)!.home;
               },
               home: HomeRoute(),
               locale: localeModel.getLocale(),
               //支持美国英语和中文简体
-              supportedLocales: [
-                const Locale('en', 'US'), // 美国英语
-                const Locale('zh', 'CN'), // 中文简体
-                //其它Locales
-              ],
-              localizationsDelegates: [
+              supportedLocales: EyepetizerLocalizations.supportedLocales,
+              localizationsDelegates: const [
                 // 本地化的代理类
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GmLocalizationsDelegate()
+                ...EyepetizerLocalizations.localizationsDelegates,
               ],
               localeResolutionCallback:
                   (Locale? _locale, Iterable<Locale> supportedLocales) {

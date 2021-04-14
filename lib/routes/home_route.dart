@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_eyepetizer/app_constants.dart';
 import 'package:flutter_eyepetizer/common/toast_utils.dart';
-import 'package:flutter_eyepetizer/l10n/localization_intl.dart';
 import 'package:flutter_eyepetizer/routes/daily_page.dart';
 import 'package:flutter_eyepetizer/routes/recommend_page.dart';
 
