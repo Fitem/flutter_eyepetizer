@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a zh_CN locale. All the
+// This is a library that provides messages for a en locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -17,15 +17,17 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'zh_CN';
+  String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "title" : MessageLookupByLibrary.simpleMessage("Flutter开眼"),
-    "home" : MessageLookupByLibrary.simpleMessage("主页"),
-    "theme" : MessageLookupByLibrary.simpleMessage("换肤"),
-    "language" : MessageLookupByLibrary.simpleMessage("语言"),
-    "auto" : MessageLookupByLibrary.simpleMessage("跟随系统"),
-    "community" : MessageLookupByLibrary.simpleMessage("社区"),
+    "auto" : MessageLookupByLibrary.simpleMessage("Auto"),
+    "community" : MessageLookupByLibrary.simpleMessage("Community"),
+    "daily" : MessageLookupByLibrary.simpleMessage("Daily"),
+    "discovery" : MessageLookupByLibrary.simpleMessage("Discovery"),
+    "home" : MessageLookupByLibrary.simpleMessage("home"),
+    "language" : MessageLookupByLibrary.simpleMessage("Language"),
+    "recommend" : MessageLookupByLibrary.simpleMessage("Recommend"),
+    "theme" : MessageLookupByLibrary.simpleMessage("Theme")
   };
 }
