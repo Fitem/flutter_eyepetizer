@@ -84,7 +84,19 @@ class Data extends Object {
   @JsonKey(name: 'title')
   String? title;
 
-  Data(this.dataType,this.header,this.content,this.text,this.type,this.cover,this.library,this.category,this.title);
+  @JsonKey(name: 'icon')
+  String? icon;
+
+  @JsonKey(name: 'description')
+  String? description;
+
+  @JsonKey(name: 'description')
+  Follow? follow;
+
+  @JsonKey(name: 'rightText')
+  String? rightText;
+
+  Data(this.dataType,this.header,this.content,this.text,this.type,this.cover,this.library,this.category,this.title, this.icon, this.description, this.follow, this.rightText);
 
   factory Data.fromJson(Map<String, dynamic> srcJson) => _$DataFromJson(srcJson);
 

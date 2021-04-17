@@ -60,6 +60,12 @@ Data _$DataFromJson(Map<String, dynamic> json) {
     json['library'] as String?,
     json['category'] as String?,
     json['title'] as String?,
+    json['icon'] as String?,
+    json['description'] as String?,
+    json['follow'] == null
+        ? null
+        : Follow.fromJson(json['follow'] as Map<String, dynamic>),
+    json['rightText'] as String?,
   );
 }
 
@@ -73,6 +79,10 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'library': instance.library,
       'category': instance.category,
       'title': instance.title,
+      'icon': instance.icon,
+      'description': instance.description,
+      'follow': instance.follow,
+      'rightText': instance.rightText,
     };
 
 Header _$HeaderFromJson(Map<String, dynamic> json) {

@@ -28,8 +28,226 @@ class _RepoItemState extends State<RepoItem> {
         return ItemCardFollowCardViewHolder(widget.item);
       case Constants.VIDEO_SMALL_CARD:
         return VideoSmallCardViewHolder(widget.item);
+      case Constants.TEXT_CARD_FOOTER3:
+        return TextCardFooter3ViewHolder(widget.item);
+      case Constants.TAG_BRIEFCARD:
+        return TagBriefCardViewHolder(widget.item);
+      case Constants.TEXT_CARD_FOOTER2:
+        return TextCardFooter2ViewHolder(widget.item);
+      case Constants.TOPIC_BRIEFCARD:
+        return TopicBriefCardViewHolder(widget.item);
     }
     return EmptyViewHolder();
+  }
+}
+
+class TopicBriefCardViewHolder extends StatefulWidget {
+  TopicBriefCardViewHolder(this.item) : super();
+  final ItemList item;
+
+  @override
+  _TopicBriefCardViewHolderState createState() =>
+      _TopicBriefCardViewHolderState();
+}
+
+class _TopicBriefCardViewHolderState extends State<TopicBriefCardViewHolder> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 14, top: 5, right: 14, bottom: 5),
+      child: Row(
+        children: [
+          ClipRRect(
+            child: Image.network(
+              checkNullForString(widget.item.data?.icon),
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(2),
+          ),
+          Expanded(child: Container(
+            margin: EdgeInsets.only(left: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(child: Text(
+                        checkNullForString(widget.item.data?.title),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),),
+                    ],
+                  ),
+                  Text(
+                    checkNullForString(widget.item.data?.description),
+                    style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                  )
+                ],
+              )
+          )),
+        ],
+      ),
+    );
+  }
+}
+
+class TextCardFooter2ViewHolder extends StatefulWidget {
+  TextCardFooter2ViewHolder(this.item) : super();
+  final ItemList item;
+
+  @override
+  _TextCardFooter2ViewHolderState createState() =>
+      _TextCardFooter2ViewHolderState();
+}
+
+class _TextCardFooter2ViewHolderState extends State<TextCardFooter2ViewHolder> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 14, top: 10, right: 14, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            checkNullForString(widget.item.data?.text),
+            style: TextStyle(fontSize: 14.0),
+          ),
+          Icon(
+            Icons.arrow_right,
+            size: 18,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TagBriefCardViewHolder extends StatefulWidget {
+  TagBriefCardViewHolder(this.item) : super();
+  final ItemList item;
+
+  @override
+  _TagBriefCardViewHolderState createState() => _TagBriefCardViewHolderState();
+}
+
+class _TagBriefCardViewHolderState extends State<TagBriefCardViewHolder> {
+  @override
+  Widget build(BuildContext context) {
+    var url = checkNullForString(widget.item.data?.icon);
+    var description = checkNullForString(widget.item.data?.description);
+    var title = checkNullForString(widget.item.data?.title);
+    return Container(
+      padding: EdgeInsets.only(left: 14, top: 5, right: 14, bottom: 5),
+      child: Row(
+        children: [
+          ClipRRect(
+            child: Image.network(
+              url,
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(2.0),
+          ),
+          Expanded(
+              child: Container(
+            margin: EdgeInsets.only(left: 10),
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 2),
+                  child: Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )),
+          OutlinedButton.icon(
+            style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size(1, 1)),
+                padding:
+                    MaterialStateProperty.all(EdgeInsets.fromLTRB(4, 2, 4, 2))),
+            onPressed: () {},
+            icon: Icon(
+              Icons.add,
+              size: 10,
+            ),
+            label: Text(
+              "关注",
+              style: TextStyle(fontSize: 12),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class TextCardFooter3ViewHolder extends StatefulWidget {
+  TextCardFooter3ViewHolder(this.item) : super();
+  final ItemList item;
+
+  @override
+  _TextCardFooter3ViewHolderState createState() =>
+      _TextCardFooter3ViewHolderState();
+}
+
+class _TextCardFooter3ViewHolderState extends State<TextCardFooter3ViewHolder> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          ElevatedButton(
+            child: Text(
+              "刷新推荐",
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () {},
+            style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size(1, 1)),
+                padding:
+                    MaterialStateProperty.all(EdgeInsets.fromLTRB(8, 4, 8, 4))),
+          ),
+          Positioned(
+            right: 12.0,
+            child: TextButton(
+              child: Text(checkNullForString(widget.item.data?.text)),
+              onPressed: () {},
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size(1, 1)),
+                padding:
+                    MaterialStateProperty.all(EdgeInsets.fromLTRB(4, 2, 4, 2)),
+                textStyle: MaterialStateProperty.resolveWith(
+                    (states) => TextStyle(fontSize: 12)),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -109,38 +327,40 @@ class TextCardHeader5ViewHolder extends StatefulWidget {
 class _TextCardHeader5ViewHolderState extends State<TextCardHeader5ViewHolder> {
   @override
   Widget build(BuildContext context) {
+    bool hasFollow = widget.item.data?.follow != null;
     return Container(
       child: Row(
         children: [
           Expanded(
             child: Row(
               children: [
-                Text("五分钟新知"),
+                Text(checkNullForString(widget.item.data?.text)),
                 Icon(
                   Icons.arrow_right,
-                  size: 10,
+                  size: 16,
                 )
               ],
             ),
           ),
-          OutlinedButton.icon(
-            style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(1, 1)),
-                padding:
-                    MaterialStateProperty.all(EdgeInsets.fromLTRB(4, 2, 4, 2))),
-            onPressed: () {},
-            icon: Icon(
-              Icons.add,
-              size: 10,
+          if (hasFollow)
+            OutlinedButton.icon(
+              style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size(1, 1)),
+                  padding: MaterialStateProperty.all(
+                      EdgeInsets.fromLTRB(4, 2, 4, 2))),
+              onPressed: () {},
+              icon: Icon(
+                Icons.add,
+                size: 10,
+              ),
+              label: Text(
+                "关注",
+                style: TextStyle(fontSize: 12),
+              ),
             ),
-            label: Text(
-              "关注",
-              style: TextStyle(fontSize: 12),
-            ),
-          )
         ],
       ),
-      padding: EdgeInsets.only(left: 14, top: 10, right: 14),
+      padding: EdgeInsets.only(left: 14, top: 10, right: 14, bottom: 10),
     );
   }
 }
@@ -159,6 +379,7 @@ class _TextCardHeader7ViewHolderState extends State<TextCardHeader7ViewHolder> {
   @override
   Widget build(BuildContext context) {
     String title = checkNullForString(widget.item.data?.text);
+    String rightText = checkNullForString(widget.item.data?.rightText);
     return Container(
       padding: EdgeInsets.only(left: 14, top: 10, right: 14),
       child: Row(
@@ -189,7 +410,7 @@ class _TextCardHeader7ViewHolderState extends State<TextCardHeader7ViewHolder> {
               child: Row(
                 children: [
                   Text(
-                    "查看往期",
+                    rightText,
                     style: TextStyle(fontSize: 12.0),
                   ),
                   Icon(
@@ -242,8 +463,7 @@ class TappableTravelDestinationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String feed =
-        checkNullForString(item.data?.content?.data?.cover?.feed);
+    String feed = checkNullForString(item.data?.content?.data?.cover?.feed);
     String avatarUrl = checkNullForString(item.data?.header?.icon);
     String title = checkNullForString(item.data?.header?.title);
     String desc = checkNullForString(item.data?.header?.description);
